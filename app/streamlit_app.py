@@ -13,20 +13,20 @@ st.title("Sales Forecasting with SARIMAX")
 st.write("Upload file CSV berisi kolom Order Date dan Sales. Atau pakai sample bawaan.")
 
 uploaded = st.file_uploader("Upload train.csv", type=["csv"])
+
+# baca file
 if uploaded is not None:
     df = pd.read_csv(uploaded)
 else:
-    # fallback sample
-try:
-    df = pd.read_csv(os.path.join("data", "raw", "train.csv"))
-except FileNotFoundError:
-    st.warning("File train.csv tidak ditemukan, silakan upload di bawah.")
-    uploaded = st.file_uploader("Upload train.csv", type=["csv"])
-    if uploaded is not None:
-        df = pd.read_csv(uploaded)
-    else:
-        st.stop()
-
+    try:
+        df = pd.read_csv(os.path.join("data", "raw", "train.csv"))
+    except FileNotFoundError:
+        st.warning("File train.csv tidak ditemukan, silakan upload di bawah.")
+        uploaded = st.file_uploader("Upload train.csv", type=["csv"])
+        if uploaded is not None:
+            df = pd.read_csv(uploaded)
+        else:
+            st.stop()
 
 # normalisasi kolom
 cols = {c: c.strip() for c in df.columns}

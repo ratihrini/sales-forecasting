@@ -1,0 +1,30 @@
+# Folder virtual environment
+.venv/
+env/
+venv/
+
+# File cache dan pyc
+__pycache__/
+*.pyc
+
+# Folder data mentah (biasanya besar)
+data/raw/
+data/processed/
+*.csv
+
+# File model dan hasil training
+models/
+*.joblib
+*.pkl
+*.h5
+
+# File konfigurasi lokal
+.DS_Store
+.idea/
+.vscode/
+
+# Notebook checkpoint
+.ipynb_checkpoints/
+
+# Streamlit cache
+.streamlit/

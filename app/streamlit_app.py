@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -16,8 +17,15 @@ if uploaded is not None:
     df = pd.read_csv(uploaded)
 else:
     # fallback sample
-    data_path = os.path.join("data", "raw", "train.csv")
-    df = pd.read_csv(data_path)
+try:
+    df = pd.read_csv(os.path.join("data", "raw", "train.csv"))
+except FileNotFoundError:
+    st.warning("File train.csv tidak ditemukan, silakan upload di bawah.")
+    uploaded = st.file_uploader("Upload train.csv", type=["csv"])
+    if uploaded is not None:
+        df = pd.read_csv(uploaded)
+    else:
+        st.stop()
 
 
 # normalisasi kolom
